@@ -33,3 +33,10 @@ Stopped  ProtonVPN WireG... ProtonVPN WireGuard
 PS C:\> Start-Service -Name "ProtonVPN Wireguard"
 
 ================================================================
+
+Detected:Behavior:Win32/Meterpreter.A!sms
+
+
+
+
+
